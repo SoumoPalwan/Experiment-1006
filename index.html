@@ -4,33 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soil Scanner Car Control</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>🚜 <span>Soil Scanner Car Control</span> 🌱</h1>
 
-    <h1>🚜 Soil Scanner Car Control 🌱</h1>
-
-    <button id="connect-btn" class="bluetooth-btn">🔵 Connect Bluetooth</button>
+    <button id="connectBtn">🔵 Connect Bluetooth</button>
 
     <div class="control-container">
-        <button id="forward-btn" class="control-btn">⬆ </button>
+        <button class="control-btn up" onclick="move('up')">⬆</button>
         <div class="middle-row">
-            <button id="left-btn" class="control-btn">⬅</button>
-            <button id="stop-btn" class="control-btn">⭕</button>
-            <button id="right-btn" class="control-btn">➡ </button>
+            <button class="control-btn left" onclick="move('left')">⬅</button>
+            <button class="control-btn stop" onclick="move('stop')">⭕</button>
+            <button class="control-btn right" onclick="move('right')">➡</button>
         </div>
-        <button id="backward-btn" class="control-btn">⬇ Backward</button>
+        <button class="control-btn down" onclick="move('down')">⬇</button>
     </div>
 
-    <button id="sense-soil-btn" class="sense-btn">🌱 Sense Soil</button>
+    <button id="senseSoilBtn">🌱 Sense Soil</button>
 
     <div class="data-container">
         <h2>📊 Soil Data</h2>
-        <p>Moisture: <span id="moisture-data">--%</span></p>
-        <p>Temperature: <span id="temperature-data">--°C</span></p>
-        <p>Humidity: <span id="humidity-data">--%</span></p>
+        <p><b>Moisture:</b> --%</p>
+        <p><b>Temperature:</b> --°C</p>
+        <p><b>Humidity:</b> --%</p>
     </div>
 
-    <script src="script.js"></script> <!-- Link to JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
