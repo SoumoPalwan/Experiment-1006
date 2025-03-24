@@ -1,46 +1,83 @@
 let bluetoothDevice;
-let characteristic;
+let bluetoothCharacteristic;
+let soilDataCharacteristic;
 
-// Bluetooth Connection
-document.getElementById("connect-btn").addEventListener("click", async () => {
+// Function to connect Bluetooth
+async function connectBluetooth() {
     try {
         bluetoothDevice = await navigator.bluetooth.requestDevice({
             acceptAllDevices: true,
-            optionalServices: ["00001234-0000-1000-8000-00805f9b34fb"] // Replace with correct UUID
+            optionalServices: ['00001101-0000-1000-8000-00805F9B34FB'] // Standard Serial UUID
         });
-        console.log("Connected to Bluetooth device:", bluetoothDevice.name);
-    } catch (error) {
-        console.error("Bluetooth connection failed:", error);
-    }
-});
 
-// Car Movement Controls
-function sendCommand(command) {
-    if (bluetoothDevice && characteristic) {
-        const encoder = new TextEncoder();
-        characteristic.writeValue(encoder.encode(command));
-        console.log("Sent command:", command);
-    } else {
-        console.warn("Bluetooth not connected.");
+        const server = await bluetoothDevice.gatt.connect();
+        const service = await server.getPrimaryService('00001101-0000-1000-8000-00805F9B34FB');
+        bluetoothCharacteristic = await service.getCharacteristic('00002A57-0000-1000-8000-00805F9B34FB');
+
+        // Start listening for sensor data
+        soilDataCharacteristic = await service.getCharacteristic('00002A58-0000-1000-8000-00805F9B34FB');
+        soilDataCharacteristic.addEventListener('characteristicvaluechanged', handleSensorData);
+        await soilDataCharacteristic.startNotifications();
+
+        alert("✅ Bluetooth Connected!");
+    } catch (error) {
+        alert("❌ Bluetooth Connection Failed!");
+        console.error(error);
     }
 }
 
-// Button Event Listeners
-document.getElementById("forward-btn").addEventListener("mousedown", () => sendCommand("F"));
-document.getElementById("forward-btn").addEventListener("mouseup", () => sendCommand("S"));
+// Function to send movement commands
+async function move(direction) {
+    if (!bluetoothCharacteristic) {
+        alert("⚠️ Connect to Bluetooth first!");
+        return;
+    }
 
-document.getElementById("backward-btn").addEventListener("mousedown", () => sendCommand("B"));
-document.getElementById("backward-btn").addEventListener("mouseup", () => sendCommand("S"));
+    let command = "";
+    switch (direction) {
+        case "up": command = "F"; break;
+        case "down": command = "B"; break;
+        case "left": command = "L"; break;
+        case "right": command = "R"; break;
+        case "stop": command = "S"; break;
+    }
 
-document.getElementById("left-btn").addEventListener("mousedown", () => sendCommand("L"));
-document.getElementById("left-btn").addEventListener("mouseup", () => sendCommand("S"));
+    try {
+        await bluetoothCharacteristic.writeValue(new TextEncoder().encode(command));
+        console.log("Sent:", command);
+    } catch (error) {
+        console.error("Error sending command:", error);
+    }
+}
 
-document.getElementById("right-btn").addEventListener("mousedown", () => sendCommand("R"));
-document.getElementById("right-btn").addEventListener("mouseup", () => sendCommand("S"));
+// Function to request soil data
+async function senseSoil() {
+    if (!bluetoothCharacteristic) {
+        alert("⚠️ Connect to Bluetooth first!");
+        return;
+    }
 
-document.getElementById("stop-btn").addEventListener("click", () => sendCommand("S"));
+    try {
+        await bluetoothCharacteristic.writeValue(new TextEncoder().encode("D")); // Request data
+        console.log("Requested Soil Data");
+    } catch (error) {
+        console.error("Error requesting soil data:", error);
+    }
+}
 
-// Sensor Reading
-document.getElementById("sense-soil-btn").addEventListener("click", () => {
-    alert("Reading soil data... (Functionality needs to be implemented)");
-});
+// Function to handle incoming soil sensor data
+function handleSensorData(event) {
+    let value = new TextDecoder().decode(event.target.value);
+    console.log("Received Sensor Data:", value);
+
+    // Expecting data format: "moisture,temperature,humidity"
+    let [moisture, temperature, humidity] = value.split(",");
+
+    document.getElementById("moisture").innerText = moisture + "%";
+    document.getElementById("temperature").innerText = temperature + "°C";
+    document.getElementById("humidity").innerText = humidity + "%";
+}
+
+// Event Listeners
+document.getElementById("connectBtn").addEventListener("click", connectBluetooth);
+document.getElementById("senseSoilBtn").addEventListener("click", senseSoil);
