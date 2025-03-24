@@ -1,0 +1,110 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #0D1B2A; /* Dark blue background */
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #4CAF50;
+    font-size: 24px;
+}
+
+/* Bluetooth Button */
+.bluetooth-btn {
+    background-color: #1E88E5;
+    color: white;
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.bluetooth-btn::before {
+    content: "🔵"; /* Bluetooth icon */
+    font-size: 18px;
+}
+
+/* Control Buttons */
+.control-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.up { background-color: #1E88E5; } /* Blue */
+.down { background-color: #D32F2F; } /* Red */
+.left { background-color: #FBC02D; } /* Yellow */
+.right { background-color: #FB8C00; } /* Orange */
+.stop { background-color: #AB47BC; } /* Purple */
+
+/* Soil Sense Button */
+.sense-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.sense-btn::before {
+    content: "🌱"; /* Leaf icon */
+    font-size: 18px;
+}
+
+/* Data Display */
+.data-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.data-container h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.data-container p {
+    font-size: 16px;
+    margin: 5px 0;
+}
