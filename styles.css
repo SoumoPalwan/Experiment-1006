@@ -1,110 +1,85 @@
-/* General Styles */
+/* General Styling */
 body {
     font-family: Arial, sans-serif;
+    background-color: #0B1627;
     text-align: center;
-    background-color: #0D1B2A; /* Dark blue background */
     color: white;
-    margin: 0;
-    padding: 20px;
+    margin: 20px;
 }
 
 h1 {
-    color: #4CAF50;
-    font-size: 24px;
+    color: #27AE60;
+    font-size: 22px;
 }
 
-/* Bluetooth Button */
-.bluetooth-btn {
-    background-color: #1E88E5;
+/* Bluetooth Connect Button */
+#connectBtn {
+    background-color: #1A73E8;
     color: white;
-    padding: 12px 25px;
-    font-size: 18px;
+    font-size: 16px;
+    padding: 12px 20px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    margin: 15px auto;
 }
 
-.bluetooth-btn::before {
-    content: "🔵"; /* Bluetooth icon */
-    font-size: 18px;
-}
-
-/* Control Buttons */
-.control-buttons {
+/* Control Buttons Layout */
+.control-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
 }
 
-.button-row {
+.middle-row {
     display: flex;
+    gap: 10px;
     justify-content: center;
-    gap: 15px;
+    margin: 10px 0;
 }
 
+/* Circular Control Buttons */
 .control-btn {
     width: 60px;
     height: 60px;
-    font-size: 20px;
     border-radius: 50%;
+    font-size: 24px;
+    color: white;
     border: none;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.up { background-color: #1E88E5; } /* Blue */
-.down { background-color: #D32F2F; } /* Red */
-.left { background-color: #FBC02D; } /* Yellow */
-.right { background-color: #FB8C00; } /* Orange */
-.stop { background-color: #AB47BC; } /* Purple */
+/* Button Colors */
+.up { background-color: #3498DB; } /* Blue */
+.left { background-color: #F1C40F; } /* Yellow */
+.stop { background-color: #9B59B6; } /* Purple */
+.right { background-color: #E67E22; } /* Orange */
+.down { background-color: #E74C3C; } /* Red */
 
-/* Soil Sense Button */
-.sense-btn {
-    background-color: #4CAF50;
+/* Sense Soil Button */
+#senseSoilBtn {
+    background-color: #2ECC71;
     color: white;
-    padding: 12px 25px;
-    font-size: 18px;
+    font-size: 16px;
+    padding: 12px 20px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 15px;
-}
-
-.sense-btn::before {
-    content: "🌱"; /* Leaf icon */
-    font-size: 18px;
+    margin-top: 20px;
 }
 
 /* Data Display */
 .data-container {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #162B46;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    text-align: left;
     margin-top: 20px;
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.data-container h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.data-container p {
-    font-size: 16px;
-    margin: 5px 0;
-}
+    width: 220px;
+    }
